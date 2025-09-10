@@ -44,9 +44,7 @@ import FooterList from "../DashBoardPages/FooterAdd/FooterList/FooterList";
 import AdminForm from "../DashBoardPages/FooterAdd/AdminForm/AdminForm";
 import SuccessStudents from "../DashBoardPages/FooterAdd/SuccessStudents/SuccessStudents";
 import HomeSlider from "../DashBoardPages/FooterAdd/HomeSlider/HomeSlider";
-
-
-
+import InfoCard from "../DashBoardPages/FooterAdd/InfoCard/InfoCard";
 
 const Router = createBrowserRouter([
   {
@@ -122,7 +120,8 @@ const Router = createBrowserRouter([
       {
         path: "/dashBoard/requestedBranches",
         Component: RequestedBranches,
-      },{
+      },
+      {
         path: "/dashBoard/ExamQuestion",
         Component: ExamQuestion,
       },
@@ -133,7 +132,7 @@ const Router = createBrowserRouter([
       {
         path: "/dashBoard/BranchStudents",
         Component: BranchStudents,
-        loader:()=>fetch('http://localhost:5000/StudentsList')
+        loader: () => fetch("http://localhost:5000/StudentsList"),
       },
       {
         path: "/dashBoard/OMRSheet",
@@ -147,7 +146,7 @@ const Router = createBrowserRouter([
         path: "/dashBoard/AddStudent",
         Component: StudentsList,
       },
-      
+
       {
         path: "/dashBoard/ADDBranches",
         Component: ADDBranches,
@@ -173,11 +172,14 @@ const Router = createBrowserRouter([
         Component: HomeSlider,
       },
       {
+        path: "/dashBoard/InfoCard",
+        Component: InfoCard,
+      },
+      {
         path: "/dashBoard/AllStudentsDashBoardPage",
         Component: AllStudentsDashBoardPage,
-        loader:()=>fetch('http://localhost:5000/StudentsList')
+        loader: () => fetch("http://localhost:5000/StudentsList"),
       },
-      
     ],
   },
 ]);

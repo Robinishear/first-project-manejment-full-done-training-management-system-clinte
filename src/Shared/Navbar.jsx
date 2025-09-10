@@ -107,7 +107,7 @@ const Navbar = () => {
           }`}
         >
           {/* Navigation Links */}
-          <ul className="flex-1 flex flex-col lg:flex-row items-center justify-end space-y-2 lg:space-y-0 lg:space-x-2 mt-2 lg:mt-0">
+          <ul className="flex-1 flex flex-col lg:flex-row justify-end space-y-2 lg:space-y-0 lg:space-x-2 mt-2 lg:mt-0">
             {navigation.map((item, idx) => (
               <li key={idx} className="rounded-lg">
                 <NavLink

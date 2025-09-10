@@ -35,7 +35,7 @@ export default function SuccessStudents() {
   const totalPages = Math.ceil(successStudents.length / studentsPerPage);
 
   return (
-    <div className="mt-10 py-5 rounded-2xl bg-gray-800 ">
+    <div className="mt-10 py-5 rounded-2xl ">
       <div className="flex items-center justify-center py-6 text-3xl font-bold text-cyan-700">
         Success Students
       </div>
