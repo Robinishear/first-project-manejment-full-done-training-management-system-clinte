@@ -8,7 +8,7 @@ export default function DashboardPage() {
 
   // pagination states
   const [currentPage, setCurrentPage] = useState(1);
-  const cardsPerPage = 8; 
+  const cardsPerPage = 12;
 
   useEffect(() => {
     axios.get("http://localhost:5000/cards").then((res) => setCards(res.data));
@@ -33,8 +33,11 @@ export default function DashboardPage() {
 
   return (
     <div className="bg-gray-800 py-6 rounded-2xl">
+      <div className="flex items-center justify-center text-2xl font-bold text-gray-400 py-7">
+        খবর: ২০২৫-২৬ শিক্ষাবর্ষে ডিপ্লোমা পর্যায়ে ভর্তি পরীক্ষা (২০২৫-০৭-২৭)
+      </div>
       <div className="flex ">
-        <div className="flex-1 p-4 md:p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 max-w-7xl mx-auto">
+        <div className="flex-1 p-4 md:p-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-3 max-w-7xl mx-auto">
           {currentCards.map((card) => (
             <div
               key={card._id}

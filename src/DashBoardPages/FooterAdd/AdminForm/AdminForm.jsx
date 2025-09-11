@@ -5,7 +5,7 @@ export default function AdminForm() {
   const [name, setName] = useState("");
   const [title, setTitle] = useState("");
   const [imageFile, setImageFile] = useState(null);
-  const [items, setItems] = useState(["", "", "", "", ""]); // 5 item fields
+  const [items, setItems] = useState([""]); 
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -38,12 +38,12 @@ export default function AdminForm() {
     try {
       let imageUrl = null;
 
-      // যদি নতুন image file থাকে, তাহলে upload করবে
+      
       if (imageFile) {
         const formData = new FormData();
         formData.append("image", imageFile);
 
-        const imgbbKey = "864ced6637c33bde4c71585921a52efc"; 
+        const imgbbKey = "5175db627df59a16e4890e5f6958078a"; 
         const imgbbRes = await axios.post(
           `https://api.imgbb.com/1/upload?key=${imgbbKey}`,
           formData
@@ -92,9 +92,7 @@ export default function AdminForm() {
     setItems([
       card.items[0] || "",
       card.items[1] || "",
-      card.items[2] || "",
-      card.items[3] || "",
-      card.items[4] || "",
+
     ]);
     setImageFile(null);
   };
@@ -104,7 +102,7 @@ export default function AdminForm() {
     setName("");
     setTitle("");
     setImageFile(null);
-    setItems(["", "", "", "", ""]);
+    setItems(["",]);
   };
 
   return (
@@ -117,7 +115,7 @@ export default function AdminForm() {
       <input
         type="text"
         placeholder="Name"
-        className="border p-2 w-full mb-2 text-black"
+        className="border text-white p-2 w-full mb-2 "
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
@@ -126,7 +124,7 @@ export default function AdminForm() {
       <input
         type="text"
         placeholder="Title"
-        className="border p-2 w-full mb-2 text-black"
+        className="border p-2 w-full mb-2 "
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
@@ -146,7 +144,7 @@ export default function AdminForm() {
           key={index}
           type="text"
           placeholder={`Item ${index + 1}`}
-          className="border p-2 w-full mb-2 text-black"
+          className="border p-2 w-full mb-2 "
           value={item}
           onChange={(e) => handleItemChange(index, e.target.value)}
         />

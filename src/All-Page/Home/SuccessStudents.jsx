@@ -41,7 +41,7 @@ export default function SuccessStudents() {
       </div>
 
       <div className="flex ">
-        <div className="flex-1 p-4 md:p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 max-w-7xl mx-auto">
+        <div className="flex-1 p-4 md:p-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 max-w-7xl mx-auto">
           {currentStudents.map((student) => (
             <div
               key={student._id}

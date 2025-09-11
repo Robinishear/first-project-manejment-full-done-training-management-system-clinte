@@ -58,7 +58,7 @@ export default function SuccessStudents() {
       setName("");
       setTitle("");
       setImageFile(null);
-      setItems(["", "", "", "", "", ""]);
+      setItems(["", ""]);
     } catch (err) {
       console.error(err);
       alert("Error adding student.");

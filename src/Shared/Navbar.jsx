@@ -66,12 +66,12 @@ const Navbar = () => {
             />
             <h1>
               {" "}
-              <span className="font-bold text-indigo-300">Bangladesh</span>{" "}
+              <span className="font-bold text-amber-400">Bangladesh</span>{" "}
               <br />
-              <span className="font-bold text-orange-100">Naiional </span>
+              <span className="font-bold text-orange-100">Technical </span>
               <span className="font-bold text-gray-500">
                 {" "}
-                Technical Institute
+                Education Institute
               </span>
             </h1>
           </div>

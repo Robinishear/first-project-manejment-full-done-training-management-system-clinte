@@ -77,6 +77,7 @@ console.log(filteredStudent);
         { label: "Institute Name", value: filteredStudent.institute },
         { label: "Institute Code", value: filteredStudent.branchId },
         { label: "Roll", value: filteredStudent.studentId },
+        { label: "picture", value: filteredStudent.studentId },
         { label: "Registration No", value: filteredStudent.passport },
         { label: "Student Type", value: "Regular" },
         { label: "Course Duration", value: filteredStudent.duration },
@@ -186,7 +187,7 @@ console.log(filteredStudent);
                     {/* Image Section */}
                     <div className="flex justify-center items-start pt-2 md:pt-0 ">
                       <img
-                        src={`http://localhost:5000${filteredStudent.picture}`}
+                        src={`${filteredStudent.picture}`}
                         alt="Student"
                         className="w-38 h-46 object-cover border border-gray-300 p-1 bg-white"
                       />

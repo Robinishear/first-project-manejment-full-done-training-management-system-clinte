@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+
 export default function ADDBranches() {
   const [branches, setBranches] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedBranch, setSelectedBranch] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
+  // Load branches
   useEffect(() => {
     fetchBranches();
   }, []);
@@ -16,10 +18,11 @@ export default function ADDBranches() {
       setBranches(data);
       setLoading(false);
     } catch (err) {
-      console.error(err);
+      console.error("Fetch Branches Error:", err);
     }
   };
 
+  // Delete branch
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this branch?")) return;
     try {
@@ -28,38 +31,51 @@ export default function ADDBranches() {
       });
       fetchBranches();
     } catch (err) {
-      console.error(err);
+      console.error("Delete Error:", err);
     }
   };
 
+  // Open update modal
   const handleEdit = (branch) => {
     setSelectedBranch(branch);
     setShowModal(true);
   };
 
+  // Update branch
   const handleUpdate = async (e) => {
     e.preventDefault();
+
+    if (!selectedBranch) return;
+
+ 
+    const { _id, ...updateData } = selectedBranch;
+
     try {
-      await fetch(`http://localhost:5000/allBranches/${selectedBranch._id}`, {
+      const res = await fetch(`http://localhost:5000/allBranches/${_id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(selectedBranch),
+        body: JSON.stringify(updateData),
       });
+
+      const result = await res.json();
+      console.log("Update Result:", result);
+
       setShowModal(false);
+      setSelectedBranch(null);
       fetchBranches();
     } catch (err) {
-      console.error(err);
+      console.error("Update Error:", err);
     }
   };
 
   if (loading) return <p className="text-gray-500">Loading...</p>;
 
   return (
-    <div className="p-6 bg-gray-800 rounded-2xl ">
+    <div className="p-6 bg-gray-800 rounded-2xl">
       <h2 className="text-3xl font-bold mb-6 text-gray-200">ADD Branches</h2>
 
       <div className="overflow-x-auto">
-        <table className="table-auto  shadow-2xl bg-gray-800w-full text-left">
+        <table className="table-auto shadow-2xl bg-gray-800 w-full text-left">
           <thead>
             <tr className="bg-gray-950 text-white">
               <th className="border-t p-2">branchId</th>
@@ -67,7 +83,7 @@ export default function ADDBranches() {
               <th className="border-t p-2">directorName</th>
               <th className="border-t p-2">fatherName</th>
               <th className="border-t p-2">motherName</th>
-              <th className="border-t p-2">email.com</th>
+              <th className="border-t p-2">email</th>
               <th className="border-t p-2">password</th>
               <th className="border-t p-2">mobileNumber</th>
               <th className="border-t p-2">address</th>
@@ -88,7 +104,7 @@ export default function ADDBranches() {
             {branches.map((branch) => (
               <tr
                 key={branch._id}
-                className="border-t-b hover:bg-gray-900  transition-colors"
+                className="border-t hover:bg-gray-900 transition-colors"
               >
                 <td className="border-t p-2">{branch.branchId}</td>
                 <td className="border-t p-2">{branch.instituteName}</td>
@@ -111,13 +127,13 @@ export default function ADDBranches() {
                 <td className="border-t p-2 space-x-2">
                   <button
                     onClick={() => handleEdit(branch)}
-                    className=" text-white px-3 py-1 rounded hover:bg-blue-600"
+                    className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
                   >
                     Update
                   </button>
                   <button
                     onClick={() => handleDelete(branch._id)}
-                    className=" text-white px-3  rounded py-1 hover:text-black hover:bg-amber-100"
+                    className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
                   >
                     Delete
                   </button>
@@ -138,7 +154,7 @@ export default function ADDBranches() {
               className="space-y-3 max-h-[70vh] overflow-y-auto"
             >
               {Object.keys(selectedBranch).map((key) => {
-                if (key === "_id") return null; // skip _id
+                if (key === "_id") return null; // _id skip
                 return (
                   <input
                     key={key}
@@ -159,7 +175,10 @@ export default function ADDBranches() {
               <div className="flex justify-end space-x-2">
                 <button
                   type="button"
-                  onClick={() => setShowModal(false)}
+                  onClick={() => {
+                    setShowModal(false);
+                    setSelectedBranch(null);
+                  }}
                   className="bg-gray-400 px-4 py-2 rounded text-white hover:bg-gray-500"
                 >
                   Cancel

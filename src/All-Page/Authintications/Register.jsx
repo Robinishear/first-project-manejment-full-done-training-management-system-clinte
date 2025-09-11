@@ -86,19 +86,22 @@ export default function Register() {
   };
 
   return (
-    <div className="bg-gradient-to-br from-gray-950 via-gray-900 to-indigo-950 min-h-screen flex items-center justify-center p-10">
-      <div className="w-full max-w-6xl">
-        <div className="relative rounded-2xl px-10 py-10 shadow-lg hover:shadow-indigo-500/70 transition bg-gray-800 bg-opacity-80 backdrop-blur-sm p-8 border border-gray-700">
-          <h1 className="text-2xl font-bold text-gray-100 text-center">
-            Branch Registration
-          </h1>
-          <p className="text-sm text-gray-400 text-center mt-1">
-            Fill the form below to register
-          </p>
+    <div className="bg-gradient-to-br from-gray-950 via-gray-900 to-indigo-950 min-h-screen flex items-center justify-center p-3 sm:p-4 md:p-6 lg:p-8">
+      <div className="w-full max-w-xs sm:max-w-sm md:max-w-2xl lg:max-w-4xl xl:max-w-6xl">
+        <div className="relative rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 lg:p-10 shadow-lg hover:shadow-indigo-500/70 transition-all duration-300 bg-gray-800 bg-opacity-80 backdrop-blur-sm border border-gray-700">
+          {/* Header */}
+          <div className="text-center mb-6 sm:mb-8">
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-100">
+              Branch Registration
+            </h1>
+            <p className="text-xs sm:text-sm text-gray-400 mt-1 sm:mt-2">
+              Fill the form below to register
+            </p>
+          </div>
 
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-5"
+            className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6"
           >
             {/* Text Inputs */}
             {[
@@ -116,7 +119,7 @@ export default function Register() {
               { id: "password", label: "Password", type: "password" },
             ].map((field) => (
               <div key={field.id} className="col-span-1">
-                <label className="block text-sm text-gray-300 mb-1">
+                <label className="block text-xs sm:text-sm text-gray-300 mb-1 sm:mb-2 font-medium">
                   {field.label}
                 </label>
                 <input
@@ -125,7 +128,7 @@ export default function Register() {
                   {...register(field.id, {
                     required: "This field is required",
                   })}
-                  className={`w-full rounded-xl bg-gray-900 text-gray-100 border px-4 py-3 outline-none focus:ring-2 focus:ring-indigo-500 transition ${
+                  className={`w-full rounded-lg sm:rounded-xl bg-gray-900 text-gray-100 border px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200 ${
                     errors[field.id] ? "border-pink-500" : "border-gray-700"
                   }`}
                 />
@@ -145,16 +148,17 @@ export default function Register() {
               { id: "signaturePhoto", label: "Signature Photo" },
             ].map((file) => (
               <div key={file.id} className="col-span-1">
-                <label className="block text-sm text-gray-300 mb-1">
+                <label className="block text-xs sm:text-sm text-gray-300 mb-1 sm:mb-2 font-medium">
                   {file.label}
                 </label>
                 <input
                   type="file"
+                  accept="image/*"
                   {...register(file.id, { required: "This field is required" })}
-                  className={`w-full text-sm text-gray-300 border rounded-xl px-3 py-2 bg-gray-900 cursor-pointer
-                    file:mr-4 file:py-2 file:px-4
+                  className={`w-full text-xs sm:text-sm text-gray-300 border rounded-lg sm:rounded-xl px-2 sm:px-3 py-2 bg-gray-900 cursor-pointer
+                    file:mr-2 sm:file:mr-4 file:py-1 sm:file:py-2 file:px-2 sm:file:px-4
                     file:rounded-full file:border-0
-                    file:text-sm file:font-semibold
+                    file:text-xs sm:file:text-sm file:font-semibold
                     file:bg-indigo-600 file:text-gray-100
                     hover:file:bg-indigo-700 transition-colors
                     ${errors[file.id] ? "border-pink-500" : "border-gray-700"}`}
@@ -168,23 +172,39 @@ export default function Register() {
             ))}
 
             {/* Submit Button */}
-            <div className="col-span-2">
+            <div className="col-span-1 md:col-span-2 mt-4 sm:mt-6">
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full rounded-xl bg-indigo-600 hover:bg-indigo-700 disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold py-3 transition"
+                className="w-full rounded-lg sm:rounded-xl bg-indigo-600 hover:bg-indigo-700 disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold py-2.5 sm:py-3 text-sm sm:text-base transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98]"
               >
-                {isSubmitting ? "Submitting..." : "Register"}
+                {isSubmitting ? (
+                  <span className="flex items-center justify-center">
+                    <svg className="animate-spin -ml-1 mr-3 h-4 w-4 sm:h-5 sm:w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Submitting...
+                  </span>
+                ) : (
+                  "Register"
+                )}
               </button>
             </div>
           </form>
 
-          <p className="mt-6 text-center text-sm text-gray-400">
-            Already have an account?{" "}
-            <NavLink to="/Login" className="text-indigo-400 hover:underline">
-              Sign in
-            </NavLink>
-          </p>
+          {/* Footer */}
+          <div className="mt-6 sm:mt-8 text-center">
+            <p className="text-xs sm:text-sm text-gray-400">
+              Already have an account?{" "}
+              <NavLink 
+                to="/Login" 
+                className="text-indigo-400 hover:text-indigo-300 hover:underline transition-colors duration-200 font-medium"
+              >
+                Sign in
+              </NavLink>
+            </p>
+          </div>
         </div>
       </div>
     </div>
